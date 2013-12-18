@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2013 Desarrolladores de Tribus
@@ -18,61 +18,59 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import time
 import json
 import urllib2
 
 print '========================'
-print 'Tareas pendientes'
+print 'Tareas pendientes:'
 print '========================'
 issuesabiertos = 'https://api.github.com/repos/CanaimaGNULinux/tribus/issues?page=1&state=open'
 servidor = urllib2.urlopen(issuesabiertos)
 js = json.load(servidor)
 for tag in js:
 	print '* [] Issue: ' + '#' + str(tag['number'])
-	print 'Titulo: ' + tag['title']
-	print 'Creado: ' + tag['created_at']
-	print 'Descripcion: ' + tag['body']
-	print 'Ver issues: ' + tag['html_url']
-	print ''
-print ''
+	print u'\tTítulo: ' + tag['title']
+	print '\tCreado: ' + tag['created_at']
+	#print u'\tDescripción: ' + tag['body']
+	print '\tVer issues: ' + tag['html_url'] + '\n'
 print '========================'
-print 'Tareas realizadas'
+print 'Tareas realizadas:'
 print '========================'
 issuescerrados = 'https://api.github.com/repos/CanaimaGNULinux/tribus/issues?page=1&state=close'
 servidor = urllib2.urlopen(issuescerrados)
 js = json.load(servidor)
 for tag in js:
 	print '* [HECHO] Issue: ' + '#' + str(tag['number'])
-	print 'Titulo: ' + tag['title']
-	print 'Creado: ' + tag['created_at']
-	print 'Descripcion: ' + tag['body']
-	print 'Ver issues: ' + tag['html_url']
-	print ''
-print ''
+	print u'\tTítulo: ' + tag['title']
+	print '\tCreado: ' + tag['created_at']
+	#print u'\tDescripcion: ' + tag['body']
+	print '\tVer issues: ' + tag['html_url'] + '\n'
 print '========================'
-print 'Versiones Tribus'
+print 'Versiones Tribus:'
 print '========================'
 milestones = 'https://api.github.com/repos/CanaimaGNULinux/tribus/milestones'
 servidor = urllib2.urlopen(milestones)
 js = json.load(servidor)
 for tag in js:
-	print 'Milestone: ' + str(tag['number'])
-	print 'Titulo: ' + tag['title']
-	print 'Estado: ' + tag['state']
-	print 'Issues Abiertos: ' + str(tag['open_issues'])
-	print 'Issues Cerrados: ' + str(tag['closed_issues'])
-	print 'Creado: ' + tag['created_at']
-	print 'Ver milestones: ' + tag['url']
-	print ''
-print ''
+	print '* Milestone: ' + str(tag['number'])
+	print u'\tVersión: ' + tag['title']
+	print '\tEstado: ' + tag['state']
+	print '\tIssues Abiertos: ' + str(tag['open_issues'])
+	print '\tIssues Cerrados: ' + str(tag['closed_issues'])
+	print '\tCreado: ' + tag['created_at'] + '\n'
+	#print u'\tDescripción: ' + tag['description'] + '\n'
 print '========================'
-print 'Contribuciones'
+print 'Contribuciones:'
 print '========================'
 colaboradores = 'https://api.github.com/repos/CanaimaGNULinux/tribus/contributors'
 servidor = urllib2.urlopen(colaboradores)
 js = json.load(servidor)
 for tag in js:
-	print 'Usuario: ' + tag['login']
-	print 'Contribuciones: ' + str(tag['contributions']) + ' commit(s)'
-	print 'Ver colaborador: ' + tag['html_url']
-	print ''
+	print '* Usuario: ' + tag['login']
+	print '\tContribuciones: ' + str(tag['contributions']) + ' commit(s)'
+	print '\tVer colaborador: ' + tag['html_url'] + '\n'
+print '========================'
+print 'FIN'
+print '========================'
+time.sleep(10)
